@@ -8,5 +8,30 @@
   <div id="test1"></div>
   <div id="test2"></div>
 
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <script src="../js/babel.min.js"></script>
+
+  <script>
+    //不使用jsx
+    //创建虚拟DOM对象
+    let myId = 'atguigu'
+    let text = 'tom...'
+    const h1 = React.createElement('h1',{id:myId},text)
+    //渲染
+    ReactDOM.render(h1,document.getElementById('test1'))
+  </script>
+
+  <script type="text/babel">
+    //使用jsx
+    //创建虚拟DOM对象
+    const h2 = <h2 id={myId}>{text}</h2>
+    console.log('h2',h2);
+    
+    //渲染
+    ReactDOM.render(h2,document.getElementById('test2'))
+    const test2 = document.getElementById('test2')
+
+  </script>
 </body>
 </html>

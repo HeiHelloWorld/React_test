@@ -16,6 +16,17 @@
     /*
      功能: 动态展示列表数据
      */
+    const names = ['jQuery','zeptoo','angular','react全家桶','vue全家桶']
+    //创建虚拟DOM对象
+    const ul = (
+      <ul>
+        {
+          names.map((name,index)=><li key={index}>{name}</li>)
+        }
+      </ul>
+    )
+    //渲染
+    ReactDOM.render(ul,document.getElementById('example1'))
   </script>
 </body>
 </html>
