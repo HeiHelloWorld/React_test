@@ -14,6 +14,77 @@
   <script type="text/javascript" src="../js/babel.min.js"></script>
   <script type="text/babel">
 
+    class App extends React.Component {
+      state = {
+        todos : ['吃饭','睡觉','敲代码']
+      }
+
+      addTodo = (todo) => {
+        const todos = this.state.todos
+        //todos.unshift(todo)
+        this.setState({
+          todos : [todo,...todos]
+        })
+      }
+
+      render () {
+        const {todos} = this.state
+        return (
+          <div>
+            <h1>TODO LIST</h1>
+            <Add size={todos.length} addTodo={this.addTodo}/>
+            <List todos={todos}/>
+          </div>
+        )
+      }
+    }
+
+    // "添加"功能组件
+    class Add extends React.Component {
+      static propTypes = {
+        size : PropTypes.number.isRequired,
+        addTodo: PropTypes.func.isRequired
+      }
+
+      add = () => {
+        const todo = this.refs.todo.value.trim()
+        if(!todo){
+          this.refs.todo.value = ''
+          this.refs.todo.focus()
+          return
+        }
+        this.props.addTodo(todo)
+        this.refs.todo.value = ''
+      }
+
+      render (){
+        const { size } = this.props
+        return(
+          <div>
+            <input type="text" ref="todo"/>
+            <button onClick={this.add}>Add #{size}</button>
+          </div>
+        )
+      }
+    }
+
+    // 列表组件
+    function List (props) {
+
+      return (
+        <ul>
+          {
+            props.todos.map((todo,index) => <li key={index}>{todo}</li>)
+          }
+        </ul>
+      )
+    }
+    List.propTypes = {
+      todos:PropTypes.array.isRequired
+    }
+
+    ReactDOM.render(<App />,document.getElementById('example'))
+
   </script>
 </body>
 </html>

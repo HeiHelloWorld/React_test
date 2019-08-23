@@ -20,8 +20,25 @@
   */
 
   //定义组件
+  class Like extends React.Component {
+    state = {
+      isLikeMe : false
+    }
+
+    handleClick = ()=>{
+      const isLikeMe = !this.state.isLikeMe
+      this.setState({isLikeMe})
+    }
+
+    render (){
+      const { isLikeMe } = this.state
+      const text = isLikeMe ? '我喜欢你' : '你喜欢我'
+      return (<h2 onClick={this.handleClick}>{text}</h2>)
+    }
+  }
+
+  ReactDOM.render(<Like/>,document.getElementById('example'))
   
 </script>
 </body>
 </html>
-
